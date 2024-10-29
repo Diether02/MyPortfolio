@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <style>
+        body {
+            background-image: url('bg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td, th {
+            padding: 4px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input[type="text"], input[type="button"], input[type="reset"] {
+            width: 90%;
+            padding: 8px;
+            margin: 4px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: block;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="button"], input[type="reset"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="button"]:hover, input[type="reset"]:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .two-column li {
+            margin-bottom: 5px;
+        }
+        @media (max-width: 600px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Salary Calculator</h1>
+        <form>
+            <table>
+                <tr>
+                    <th colspan="2">Gross Salary Information</th>
+                </tr>
+                <tr>
+                    <td>Gross Salary:</td>
+                    <td><input type="number" placeholder="Enter Gross Salary" id="Text1" name="TextBox1" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Include:</strong>
+                        <ul class="two-column">
+                            <li>Annual Salary</li>
+                            <li>Wages</li>
+                            <li>Overtime</li>
+                            <li>Bonuses</li>
+                            <li>Sick Days</li>
+                            <li>Commission</li>
+                            <li>Holiday Pay</li>
+                            <li>Loans or Advances</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Tax and Other Deductions</th>
+                </tr>
+                <tr>
+                    <td>Tax:</td>
+                    <td><input type="number" placeholder="Enter Tax" id="Text2" name="TextBox2" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Include:</strong>
+                        <ul>
+                            <li>SSS</li>
+                            <li>PhilHealth</li>
+                            <li>Pag-IBIG</li>
+                            <li>Other Deductions</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <input type="button" value="Calculate Net Salary" onclick="calculateNetSalary()">
+            <input type="reset" value="Reset">
+        </form>
+        <div class="footer">
+            <p>&copy; 2022 Salary Calculator. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateNetSalary() {
+            var grossSalary = parseFloat(document.getElementById("Text1").value);
+            var taxDeductions = parseFloat(document.getElementById("Text2").value);
+            var netSalary = grossSalary - taxDeductions;
+
+            if (!isNaN(netSalary) && netSalary >= 0) {
+                alert("Net Salary: ₱" + netSalary.toFixed(2));
+            } else {
+                alert("Please enter valid salary and tax values.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 19F</title>
+    <script>
+        function startTime() {
+            var today = new Date();
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('date').innerHTML = `${months[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()} ${h}:${m}:${s} (Philippine Standard Time)`;
+            setTimeout(startTime, 500);
+        }
+
+        function checkTime(x) {
+            return x < 10 ? "0" + x : x;
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .topnav {
+            background-color: #007BFF;
+            padding: 10px 0;
+        }
+
+        .topnav a {
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .topnav a:hover {
+            background-color: white;
+            color: #007BFF;
+            border-radius: 5px;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 32px;
+        }
+
+        #date {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        img {
+            width: 380px;
+            height: 170px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, filter 0.3s;
+            filter: brightness(90%);
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            filter: brightness(100%);
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        td{
+          padding-left: 20px;
+          padding-top: 5px;
+        }
+    </style>
+</head>
+
+<body onload="startTime()">
+    <div class="topnav">
+        <a href="#">| Home |</a>
+        <a href="rates.html" target="_blank">| Rates |</a>
+        <a href="specialoffers.html" target="_blank">| Special Offers |</a>
+        <a href="reservations.html" target="_blank">| Reservations |</a>
+        <a href="contacts.html" target="_blank">| Contact Us |</a>
+    </div>
+    <h1>Fun Under the Sun</h1>
+    <div id="date"></div>
+    <table>
+        <tr>
+            <td><img src="1.jpg" alt="Image 1"></td>
+            <td><img src="2.jpg" alt="Image 2"></td>
+            <td><img src="3.jpg" alt="Image 3"></td>
+        </tr>
+        <tr>
+            <td><img src="4.jpg" alt="Image 4"></td>
+            <td><img src="5.jpg" alt="Image 5"></td>
+            <td><img src="6.jpg" alt="Image 6"></td>
+        </tr>
+        <tr>
+            <td><img src="7.jpeg" alt="Image 7"></td>
+            <td><img src="8.jpg" alt="Image 8"></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+
+</html>

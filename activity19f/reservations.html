@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        input[type="password"],
+        input[type="radio"],
+        select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        td[bgcolor="green"] {
+            background-color: #ccffcc;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        td:not([bgcolor="green"]):hover {
+            background-color: #e9ecef;
+        }
+
+        caption {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                width: 100%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            td {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <script>
+        const availability = {
+            "6-10am": { "Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": false },
+            "10:30-12pm": { "Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": false },
+            "1-3pm": { "Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": false },
+            "3:30-5pm": { "Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": false }
+        };
+
+        function validateForm(event) {
+            event.preventDefault();
+
+            const fname = document.getElementById("fname").value;
+            const email = document.getElementById("email").value;
+            const date = document.getElementById("date").value;
+            const person = document.getElementById("person").value;
+            const coupon = document.getElementById("coupon").value;
+            const termCondition = document.querySelector('input[name="termcondition"]:checked');
+            const selectedTime = document.getElementById("timeSlot").value;
+            const dayOfWeek = new Date(date).toLocaleString('en-us', { weekday: 'long' });
+
+            if (!fname || !email || !date || person < 1 || !termCondition) {
+                alert("Please fill out all required fields and agree to the terms.");
+                return false;
+            }
+
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (!availability[selectedTime][dayOfWeek]) {
+                alert("Selected time slot is not available on " + dayOfWeek);
+                return false;
+            }
+
+            alert("Reservation completed successfully!, We will email you about the payment steps. Thank you!");
+
+            document.getElementById("fname").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("timeSlot").value = "";
+            document.getElementById("person").value = "";
+            document.getElementById("coupon").value = "";
+            document.querySelector('input[name="termcondition"]:checked').checked = false;
+
+            return true;
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Hotel Reservation</h1>
+    <form onsubmit="validateForm(event)">
+        <label for="fname">Full Name*:</label>
+        <input type="text" id="fname" name="fname" placeholder="FirstName LastName" required>
+
+        <label for="email">Email Address*:</label>
+        <input type="text" id="email" name="email" placeholder="EMAIL_ADDRESS" required>
+
+        <label for="date">Arrival Date*:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="timeSlot">Select Time Slot*:</label>
+        <select id="timeSlot" required>
+            <option value="" disabled selected>Select a time</option>
+            <option value="6-10am">6-10 AM</option>
+            <option value="10:30-12pm">10:30 AM - 12 PM</option>
+            <option value="1-3pm">1 PM - 3 PM</option>
+            <option value="3:30-5pm">3:30 PM - 5 PM</option>
+        </select>
+
+        <label for="person">Number of Persons*:</label>
+        <input type="number" id="person" name="person" placeholder="1" required min="1">
+
+        <label for="coupon">Discount Coupon Code:</label>
+        <input type="password" id="coupon" name="coupon" placeholder="COUPON_CODE">
+
+        <label>Terms and Conditions*:</label>
+        <label for="agree">
+            <input type="radio" id="agree" name="termcondition" value="agree" required>
+            I Agree
+        </label>
+        <label for="disagree">
+            <input type="radio" id="disagree" name="termcondition" value="disagree" required>
+            I Disagree
+        </label>
+
+        <input type="submit" value="Complete Reservation">
+    </form>
+
+    <h1>Schedule</h1>
+    <table>
+        <caption>Travelling Time Schedule</caption>
+        <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+        <tr>
+            <td>6-10am</td>
+            <td>Available</td>
+            <td bgcolor="green">Non-Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td bgcolor="green">Non-Available</td>
+        </tr>
+        <tr>
+            <td>10:30-12pm</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td bgcolor="green">Non-Available</td>
+            <td bgcolor="green">Non-Available</td>
+            <td>Available</td>
+            <td bgcolor="green">Non-Available</td>
+            <td bgcolor="green">Non-Available</td>
+        </tr>
+        <tr>
+            <td>1-3pm</td>
+            <td bgcolor="green">Non-Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td bgcolor="green">Non-Available</td>
+        </tr>
+        <tr>
+            <td>3:30-5pm</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td>Available</td>
+            <td bgcolor="green">Non-Available</td>
+            <td bgcolor="green">Non-Available</td>
+            <td bgcolor="green">Non-Available</td>
+        </tr>
+    </table>
+</body>
+
+</html>
