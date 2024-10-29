@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            background-image: url('bg1.gif');
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        th {
+            color: #ffcc00;
+            padding: 15px;
+            font-size: 1.2em;
+        }
+
+        td {
+            text-align: center;
+            padding: 5px;
+        }
+
+        img {
+            width: 320px;
+            height: 240px;
+            border-radius: 10px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        marquee {
+            display: block;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        @media (max-width: 600px) {
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            th {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>EIGHT MOVIE TRAILERS 2019</h1>
+
+    <table>
+        <tr>
+            <th><marquee scrollamount="2">ALADDIN</marquee></th>
+            <th><marquee scrollamount="4">FAST AND FURIOUS: HOBBS & SHAW</marquee></th>
+            <th><marquee scrollamount="3">GOOD BOYS</marquee></th>
+            <th><marquee scrollamount="4">JOKER: "PUT ON A HAPPY FACE"</marquee></th>
+        </tr>
+        <tr>
+            <td><a href="aladdin trailer.html"><img src="aladdin.jpeg" alt="Aladdin"></a></td>
+            <td><a href="fast and furious 9 trailer.html"><img src="fast and furious 9.png" alt="Fast and Furious 9"></a></td>
+            <td><a href="good boys trailer.html"><img src="good boys.jpeg" alt="Good Boys"></a></td>
+            <td><a href="joker trailer.html"><img src="joker.jpeg" alt="Joker"></a></td>
+        </tr>
+        <tr>
+            <th><marquee scrollamount="3">THE LION KING</marquee></th>
+            <th><marquee scrollamount="4">POKEMON DETECTIVE PIKACHU</marquee></th>
+            <th><marquee scrollamount="4">SHAZAM: "JUST SAY THE WORD"</marquee></th>
+            <th><marquee scrollamount="4">SPIDER-MAN: "FAR FROM HOME"</marquee></th>
+        </tr>
+        <tr>
+            <td><a href="lion king trailer.html"><img src="lion king.jpg" alt="The Lion King"></a></td>
+            <td><a href="pikachu trailer.html"><img src="pikachu.jpeg" alt="Pokemon Detective Pikachu"></a></td>
+            <td><a href="shazam trailer.html"><img src="shazam.jpeg" alt="Shazam"></a></td>
+            <td><a href="spider man trailer.html"><img src="spider man.jpg" alt="Spider-Man Far From Home"></a></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
